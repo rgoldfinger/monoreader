@@ -19,10 +19,6 @@ import CommentsDisplay from './CommentsDisplay';
 import './__styles__/App.styl';
 
 var WriteApp = createReactClass({
-  contextTypes: {
-    router: PropTypes.func
-  },
-
   statics: {
     getStateFromStores() {
       return {
@@ -39,7 +35,7 @@ var WriteApp = createReactClass({
   },
 
   componentWillMount() {
-    var eventId = this.props.location.eventId;
+    var eventId = this.props.match.params.eventId;
     this.setState({eventId});
     EventStore.init(eventId);
     PostsStore.init(eventId);
@@ -60,7 +56,7 @@ var WriteApp = createReactClass({
   },
 
   componentDidUpdate() {
-    var eventId = this.props.location.eventId;
+    var eventId = this.props.match.params.eventId;
     if (eventId !== this.state.eventId) {
       this.setState({eventId});
       EventStore.init(eventId);

@@ -15,8 +15,8 @@ import EventsList from './components/EventsList';
 var Routes = () => (
   <Router>
     <div>
-      <Route path='/:eventId' component={WriteApp} />
-      <Route path="/" component={EventsList} />
+      <Route path='/write/:eventId' component={WriteApp} />
+      <Route exact path="/" component={EventsList} />
     </div>
   </Router>
 );

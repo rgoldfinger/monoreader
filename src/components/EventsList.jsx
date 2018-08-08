@@ -15,7 +15,7 @@ var Event = createReactClass({
   render() {
     return (
       <div className="row card post">
-        <Link to={'write'} params={{eventId: this.props.event._id}}>
+        <Link to={`write/${this.props.event._id}`} >
           {this.props.event.eventTitle}
         </Link>
         <span>{this.props.event.eventIsLive ? 'Live' : 'Ended'}</span>
