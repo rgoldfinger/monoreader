@@ -1,0 +1,22 @@
+{
+  "name": "monoreader",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "5to6-codemod": "^1.7.1",
+    "create-react-class": "^15.6.3",
+    "prop-types": "^15.6.2",
+    "ramda": "^0.25.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

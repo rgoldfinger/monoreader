@@ -1,0 +1,58 @@
+login `ssh root@104.236.9.106`
+start/stop: `cd /etc/init && service ril start/stop`
+logs: `tail -f /var/log/ril.log`
+
+
+restore to Compose mongo:
+mongorestore --host c194.capital.3.mongolayer.com --db ril --port 10194 --username readitlive --password HR14Rules dump/ab7yrinU
+
+dump compose mongo
+mongodump --host c194.capital.3.mongolayer.com --db ril --port 10194 --username readitlive --password HR14Rules
+
+restore to MongoLab:
+mongorestore --host ds035674.mongolab.com --db ril --port 35674 --username readitlive --password HR14Rules dump/ril
+
+dump MongoLab
+mongodump --host ds035674.mongolab.com --db ril --port 35674 --username readitlive --password HR14Rules
+
+
+
+remote shell:
+mongo proximus.modulusmongo.net:27017/Y8jyguwu -u readitlive -p HR14Rules
+
+kill collection: db.events.remove({})
+
+
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+nvm install node
+apt-get update
+sudo apt-get install build-essential g++
+apt-get install make
+mkdir /www
+# copy files to prod:
+scp -r . root@104.236.9.106:/www
+cd /etc/init
+touch ril.conf
+# paste in ril.conf with env variables
+service ril start
+
+
+
+mongodb:
+
+sudo apt-get install ufw
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow from 23456789
+sudo ufw enable
+
+
+mongo [ip]
+> use RIL
+> db.fake.save({fake: true});
+
+db.createUser({user: "readitlive", pwd: "HR14Rules", roles: [{role: "dbAdmin", db: "RIL"}]})
+
+### View server logs
+ssh root@104.236.9.106
