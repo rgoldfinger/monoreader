@@ -1,1 +1,2 @@
-web: npm run build && npm run serve-prod
+release: npm run build
+web: npm run serve-prod

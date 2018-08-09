@@ -12,6 +12,8 @@ import utils from './utils/utils';
 import passport from 'passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 
+import path from 'path';
+
 var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
 var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET;
 
@@ -29,7 +31,7 @@ db.once('open', function() {
   });
 
   app.use(compress());
-  app.use(express.static(__dirname + '../public'));
+  app.use(express.static(path.join(__dirname, '../public')));
 
   /**
    * Auth routes
