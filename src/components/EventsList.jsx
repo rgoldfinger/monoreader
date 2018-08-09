@@ -18,7 +18,7 @@ var Event = createReactClass({
         <Link to={`write/${this.props.event._id}`} >
           {this.props.event.eventTitle}
         </Link>
-        <span>{this.props.event.eventIsLive ? 'Live' : 'Ended'}</span>
+        <span>{' • '}{this.props.event.eventIsLive ? 'Live' : 'Ended'}</span>
       </div>
     );
   }
@@ -98,7 +98,6 @@ var EventsList = createReactClass({
 
     return (
       <div className="ril-container">
-        <span>hi</span>
         <div className="flex-right">
           <UserBox user={this.state.user}/>
         </div>
