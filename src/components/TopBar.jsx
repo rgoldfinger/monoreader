@@ -5,7 +5,7 @@ import { Link, Navigation } from 'react-router-dom';
 import UserBox from './UserBox';
 import ViewerCountStore from '../stores/ViewerCountStore';
 import EventActions from '../actions/EventActions';
-import './__styles__/TopBar.styl';
+import './__styles__/TopBar.css';
 
 var TopBar = createReactClass({
   propTypes: {

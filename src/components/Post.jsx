@@ -4,7 +4,7 @@ import createReactClass from 'create-react-class';
 import PostsActions from '../actions/PostsActions';
 import constants from '../constants/constants';
 import NewPost from './NewPost';
-import './__styles__/Post.styl';
+import './__styles__/Post.css';
 
 var PostMeta = createReactClass({
   propTypes: {
@@ -83,7 +83,7 @@ var Editor = createReactClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    var entryText = this.refs.text.getDOMNode().value;
+    var entryText = this.refs.text.value;
     if (entryText) {
       this.props.handleSubmit(entryText);
     }
@@ -133,7 +133,7 @@ var Reply = createReactClass({
   },
 
   handleEditSubmit() {
-    var replyText = this.refs.editor.refs.text.getDOMNode().value;
+    var replyText = this.refs.editor.refs.text.value;
     this.props.reply.postText = replyText; //HACK
     PostsActions.editReply(this.props.post, this.props.reply, this.props.index);
     this.setState({editing: false})
@@ -212,7 +212,7 @@ var Post = createReactClass({
   },
 
   handleEditSubmit() {
-    var entry = this.refs.editor.refs.text.getDOMNode().value;
+    var entry = this.refs.editor.refs.text.value;
     PostsActions.update(this.props.post._id, entry, () => this.setState({editing: false}))
   },
 

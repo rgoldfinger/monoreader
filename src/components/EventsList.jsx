@@ -30,7 +30,7 @@ var NewEvent = createReactClass({
   },
 
   create() {
-    var title = this.refs.title.getDOMNode().value;
+    var title = this.refs.title.value;
     if (title) {
       API('POST', 'event', {eventTitle: title}, (err, data) => {
         if (err) {

@@ -16,7 +16,7 @@ import TopBar from './TopBar';
 import NewPost from './NewPost';
 import Feed from './Feed';
 import CommentsDisplay from './CommentsDisplay';
-import './__styles__/App.styl';
+import './__styles__/App.css';
 
 var WriteApp = createReactClass({
   statics: {

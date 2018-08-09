@@ -1,0 +1,60 @@
+.UserArea {
+	margin: 0 !important;
+}
+
+.UserArea input {
+	margin: 8px;
+}
+
+.UserArea button {
+	margin: 0 12px;
+}
+
+.UserArea .login-dropdown {
+	position: absolute;
+	right: 6px;
+	top: 56px;
+	width: 300px;
+	z-index: 999;
+}
+
+.UserArea .UserBox {
+	margin: 0 !important;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-around;
+	cursor: pointer;
+}
+
+.UserArea .UserBox button {
+	margin: 0;
+	padding: 0 8px;
+}
+
+.UserArea .UserBox .nava-ava {
+	height: 50px;
+	padding: 0px;
+}
+
+.UserArea .UserBox .navbar-user {
+	padding: 6px;
+}
+
+.UserArea .UserBox #avatar-upload-file {
+	padding: 10px;
+}
+
+.UserArea .LoginBox {
+	margin: 8px 16px 0;
+}
+
+.UserArea .LoginBox .login-text {
+	line-height: 2;
+	cursor: pointer;
+}
+
+.UserArea .flex-container {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+}

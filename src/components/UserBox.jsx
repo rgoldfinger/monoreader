@@ -4,7 +4,7 @@ import LoginStore from '../stores/LoginStore';
 import LoginActions from '../actions/LoginActions';
 import constants from '../constants/constants';
 import S3Uploader from '../libs/S3Uploader';
-import './__styles__/UserBox.styl';
+import './__styles__/UserBox.css';
 
 var UserBox = createReactClass({
   render() {
@@ -61,14 +61,14 @@ var Login = createReactClass({
   },
 
   handleLogin() {
-    var username = this.refs.username.getDOMNode().value;
-    var password =  this.refs.password.getDOMNode().value;
+    var username = this.refs.username.value;
+    var password =  this.refs.password.value;
     LoginActions.loginUser(username, password);
   },
 
   handleSignup() {
-    var username = this.refs.username.getDOMNode().value;
-    var password =  this.refs.password.getDOMNode().value;
+    var username = this.refs.username.value;
+    var password =  this.refs.password.value;
     LoginActions.signupUser(username, password);
   },
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import createReactClass from 'create-react-class';
 import PostsActions from '../actions/PostsActions';
 import S3Uploader from '../libs/S3Uploader';
-import './__styles__/NewPost.styl';
+import './__styles__/NewPost.css';
 
 var NewPost = createReactClass({
   propTypes: {
@@ -15,10 +15,10 @@ var NewPost = createReactClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    var entryText = this.refs.text.getDOMNode().value;
+    var entryText = this.refs.text.value;
     if (entryText) {
       this.props.submitAction(entryText);
-      this.refs.text.getDOMNode().value = '';
+      this.refs.text.value = '';
     }
   },
 
@@ -29,7 +29,7 @@ var NewPost = createReactClass({
   },
 
   handleImageUpload(signingData) {
-    this.refs.text.getDOMNode().value = this.refs.text.getDOMNode().value +
+    this.refs.text.value = this.refs.text.value +
       '<img src="https://liveblogphotos2.s3-us-west-2.amazonaws.com/' +
       signingData.filename + '" class="post-image"></img>';
   },
@@ -48,10 +48,10 @@ var NewPost = createReactClass({
 
   handleCustom(e) {
     e.preventDefault();
-    var entryText = this.refs.text.getDOMNode().value;
+    var entryText = this.refs.text.value;
     if (entryText) {
       this.props.customAction.action(entryText);
-      this.refs.text.getDOMNode().value = '';
+      this.refs.text.value = '';
     }
   },
 

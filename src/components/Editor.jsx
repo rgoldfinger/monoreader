@@ -2,16 +2,16 @@ import React from 'react';
 import PostsActions from '../actions/PostsActions';
 import PropTypes from 'prop-types';
 import createReactClass from 'create-react-class';
-import './__styles__/NewPost.styl';
+import './__styles__/NewPost.css';
 
 var NewPost = createReactClass({
   handleSubmit(e) {
     e.preventDefault();
-    var entryText = this.refs.text.getDOMNode().value;
+    var entryText = this.refs.text.value;
     if (entryText) {
       PostsActions.submit(entryText);
     }
-    this.refs.text.getDOMNode().value = '';
+    this.refs.text.value = '';
   },
 
   checkSubmit(e) {

@@ -5,7 +5,7 @@ import createReactClass from 'create-react-class';
 import CommentsStore from '../stores/CommentsStore';
 import CommentsActions from '../actions/CommentsActions';
 import constants from '../constants/constants';
-import './__styles__/CommentsDisplay.styl';
+import './__styles__/CommentsDisplay.css';
 
 var CommentEntry = createReactClass({
   propTypes: {
