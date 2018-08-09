@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var schemas = require('./schemas');
+import mongoose from 'mongoose';
+import schemas from './schemas';
 var MONGO_URL = process.env.MONGO_URL;
 
 mongoose.connect(MONGO_URL);

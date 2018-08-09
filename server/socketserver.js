@@ -1,6 +1,6 @@
-var http = require('http');
-var sockjs = require('sockjs');
-var R = require('ramda')
+import http from 'http';
+import sockjs from 'sockjs';
+import R from 'ramda';
 // http://truongtx.me/2014/06/07/simple-chat-application-using-sockjs/
 var _clients = {};
 var _viewerCount = {};

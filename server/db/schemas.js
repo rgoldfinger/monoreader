@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 exports.postsSchema = new mongoose.Schema({
   postText: String,

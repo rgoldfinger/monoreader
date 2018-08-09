@@ -1,19 +1,16 @@
-var express = require('express');
+import express from 'express';
 var app = express();
-var bodyParser = require('body-parser');
-var R = require('ramda');
-
-var compress = require('compression');
-
-var socket = require('./socketserver');
-var db = require('./db/setup');
-var jwtAuth = require('./utils/jwtAuth');
-var localAuth = require('./utils/localAuth');
-var S3Sign = require('./utils/S3Sign');
-var utils = require('./utils/utils');
-
-var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
+import bodyParser from 'body-parser';
+import R from 'ramda';
+import compress from 'compression';
+import socket from './socketserver';
+import db from './db/setup';
+import jwtAuth from './utils/jwtAuth';
+import localAuth from './utils/localAuth';
+import S3Sign from './utils/S3Sign';
+import utils from './utils/utils';
+import passport from 'passport';
+import { Strategy as FacebookStrategy } from 'passport-facebook';
 
 var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
 var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET;
@@ -30,7 +27,7 @@ db.once('open', function() {
   });
 
   app.use(compress());
-  app.use(express.static(__dirname + '/public'));
+  app.use(express.static(__dirname + '../public'));
 
   /**
    * Auth routes

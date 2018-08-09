@@ -1,7 +1,7 @@
-var R = require('ramda');
-var db = require('../db/setup');
-var bcrypt = require('bcrypt');
-var sha256 = require('sha256');
+import R from 'ramda';
+import db from '../db/setup';
+import bcrypt from 'bcrypt';
+import sha256 from 'sha256';
 
 var _bcryptRounds = 10;
 

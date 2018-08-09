@@ -1,6 +1,6 @@
-var uuid = require('node-uuid');
-var aws = require('aws-sdk');
-var mime = require('mime');
+import uuid from 'node-uuid';
+import aws from 'aws-sdk';
+import mime from 'mime';
 
 var AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
 var AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY;

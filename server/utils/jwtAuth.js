@@ -1,8 +1,9 @@
 //jwt middleware. Validates the token.
 
-var jwt = require('jwt-simple');
-var db = require('../db/setup');
-var moment = require('moment');
+import jwt from 'jwt-simple';
+
+import db from '../db/setup';
+import moment from 'moment';
 
 var SECRET = 'aVery814491904sevteajlfhp148fmz';
 

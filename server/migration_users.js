@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
 mongoose.connect('mongodb://readitlive:HR14Rules@c194.capital.3.mongolayer.com:10194/ril');
 var db = mongoose.connection;
 
-var R = require('ramda');
+import R from 'ramda';
 
 var usersSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.Mixed,
