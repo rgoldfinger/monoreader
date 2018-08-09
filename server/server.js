@@ -15,6 +15,8 @@ import { Strategy as FacebookStrategy } from 'passport-facebook';
 var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
 var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET;
 
+const PORT = process.env.PORT || 5000
+
 db.once('open', function() {
 
   app.use(bodyParser.json());
@@ -348,4 +350,4 @@ db.once('open', function() {
   });
 });
 
-app.listen(80);
+app.listen(PORT);
