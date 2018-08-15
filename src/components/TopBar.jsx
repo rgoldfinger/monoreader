@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import createReactClass from 'create-react-class';
+import * as createReactClass from 'create-react-class';
 import { Link, Navigation } from 'react-router-dom';
 import UserBox from './UserBox';
 import ViewerCountStore from '../stores/ViewerCountStore';

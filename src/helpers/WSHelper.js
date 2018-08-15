@@ -8,7 +8,7 @@ var reconnect;
 
 var WSHelper = {
   connect(eventId, callback) {
-    sock = new SockJS('http://readitlive.net:3080/ws');
+    sock = new SockJS('https://glacial-journey-58935.herokuapp.com:3080/ws');
     reconnect = true;
     sock.onmessage = function(e) {
         callback(JSON.parse(e.data));
