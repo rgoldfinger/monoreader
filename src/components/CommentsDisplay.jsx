@@ -27,8 +27,8 @@ var CommentEntry = createReactClass({
     return (
       <div className="CommentEntry">
         <div className="flex-right">
-          <div onClick={this.handleDelete} className="hyperbutton">Delete</div>
-          <div onClick={this.handlePost} className="hyperbutton">Post</div>
+          <div onClick={() => this.handleDelete()} className="hyperbutton">Delete</div>
+          <div onClick={() => this.handlePost()} className="hyperbutton">Post</div>
         </div>
         <div className="flex-start">
           <img src={avatar} height="40" width="40" />

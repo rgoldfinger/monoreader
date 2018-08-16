@@ -25,10 +25,10 @@ var NewPost = createReactClass({
       <div className="NewPost container">
         <div className="row card">
           <div className="two columns">
-            <div className="hyperbutton" onClick={this.handleSubmit}>Comment</div>
+            <div className="hyperbutton" onClick={() => this.handleSubmit()}>Comment</div>
           </div>
           <form className="ten columns body-text text-area" role="form">
-            <textarea onKeyDown={this.checkSubmit} ref="text"></textarea>
+            <textarea onKeyDown={() => this.checkSubmit()} ref="text"></textarea>
           </form>
         </div>
       </div>

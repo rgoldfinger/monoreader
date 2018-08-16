@@ -52,16 +52,16 @@ var AdminArea = createReactClass({
     if (this.props.editing) {
       return (
         <div className="flex-right">
-          {this.props.handleEditCancel && <div className="hyperbutton" onClick={this.props.handleEditCancel}>Cancel</div>}
-          {this.props.handleEditSubmit && <div className="hyperbutton" onClick={this.props.handleEditSubmit}>Save</div>}
+          {this.props.handleEditCancel && <div className="hyperbutton" onClick={() => this.props.handleEditCancel()}>Cancel</div>}
+          {this.props.handleEditSubmit && <div className="hyperbutton" onClick={() => this.props.handleEditSubmit()}>Save</div>}
         </div>
       );
     } else {
       return (
         <div className="flex-right">
-          {this.props.handleReply && <div className="hyperbutton" onClick={this.props.handleReply}>Reply</div>}
-          {this.props.handleDelete && <div className="hyperbutton" onClick={this.props.handleDelete}>Delete</div>}
-          {this.props.handleEdit && <div className="hyperbutton" onClick={this.props.handleEdit}>Edit</div>}
+          {this.props.handleReply && <div className="hyperbutton" onClick={() => this.props.handleReply()}>Reply</div>}
+          {this.props.handleDelete && <div className="hyperbutton" onClick={() => this.props.handleDelete()}>Delete</div>}
+          {this.props.handleEdit && <div className="hyperbutton" onClick={() => this.props.handleEdit()}>Edit</div>}
         </div>
       );
     }
@@ -105,8 +105,8 @@ var Editor = createReactClass({
         <form className="body-text text-area" role="form">
           <textarea
             value={this.state.text}
-            onKeyDown={this.checkSubmit}
-            onChange={this.handleChange}
+            onKeyDown={() => this.checkSubmit()}
+            onChange={() => this.handleChange()}
             ref="text" />
         </form>
       </div>
@@ -145,7 +145,7 @@ var Reply = createReactClass({
         <Editor
           post={this.props.reply}
           handleCancel={() => this.setState({editing: false}) }
-          handleSubmit={this.handleEditSubmit}
+          handleSubmit={() => this.handleEditSubmit()}
           ref="editor"/>
       </div>
     );
@@ -155,9 +155,9 @@ var Reply = createReactClass({
     var adminArea = (
       <AdminArea
         handleEdit={() => this.setState({editing: true})}
-        handleEditSubmit={this.handleEditSubmit}
+        handleEditSubmit={() => this.handleEditSubmit()}
         handleEditCancel={() => this.setState({editing: false})}
-        handleDelete={this.handleDelete}
+        handleDelete={() => this.handleDelete()}
         editing={this.state.editing} />
     );
 
@@ -222,7 +222,7 @@ var Post = createReactClass({
         <Editor
           post={this.props.post}
           handleCancel={() => this.setState({editing: false}) }
-          handleSubmit={this.handleEditSubmit}
+          handleSubmit={() => this.handleEditSubmit()}
           ref="editor"/>
       </div>
     );
@@ -236,7 +236,7 @@ var Post = createReactClass({
   renderReplyEditor() {
     return (
       <div style={{marginRight: '8%'}}>
-        <NewPost submitAction={this.submitReply}
+        <NewPost submitAction={() => this.submitReply()}
           handleCancel={() => this.setState({replying: false})}/>
       </div>
     );
@@ -248,10 +248,10 @@ var Post = createReactClass({
     var adminArea = (
       <AdminArea
         handleEdit={() => this.setState({editing: true})}
-        handleEditSubmit={this.handleEditSubmit}
+        handleEditSubmit={() => this.handleEditSubmit()}
         handleEditCancel={() => this.setState({editing: false})}
         handleReply={() => this.setState({replying: true})}
-        handleDelete={this.handleDelete}
+        handleDelete={() => this.handleDelete()}
         editing={this.state.editing} />
     );
 

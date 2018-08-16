@@ -11,7 +11,8 @@ var TopBar = createReactClass({
   propTypes: {
     event: PropTypes.object,
     user: PropTypes.object,
-    isAdmin: PropTypes.bool.isRequired
+    isAdmin: PropTypes.bool.isRequired,
+    router: PropTypes.object,
   },
 
   getInitialState() {
@@ -43,7 +44,14 @@ var TopBar = createReactClass({
 
   deleteEvent() {
     if (window.confirm('Are you sure you want to delete this event?')) {
-      EventActions.delete(this.props.event, this.transitionTo.bind(this, 'events'));
+      const {router} = this.props;
+      const navigate = () => {
+        router.history.push({
+          ...router.history.location,
+          pathname: 'events'
+        })
+      }
+      EventActions.delete(this.props.event, navigate);
     }
   },
 
@@ -54,13 +62,13 @@ var TopBar = createReactClass({
   renderLiveToggle(statusText) {
     var menu = (
       <div className="nav-dropdown flex-box">
-        <div onClick={this.toggleLive} className="hyperbutton">{this.props.event.eventIsLive ? 'End Event' : 'Start Event'}</div>
-        <div onClick={this.deleteEvent} className="hyperbutton">Delete Event</div>
+        <div onClick={() => this.toggleLive()} className="hyperbutton">{this.props.event.eventIsLive ? 'End Event' : 'Start Event'}</div>
+        <div onClick={() => this.deleteEvent()} className="hyperbutton">Delete Event</div>
       </div>
     );
 
     return (
-      <div onClick={this.toggleMenu} className="hyperbutton navbar-text">
+      <div onClick={() => this.toggleMenu()} className="hyperbutton navbar-text">
         {statusText + ' — Event settings'}
         {this.state.liveMenu && menu}
       </div>

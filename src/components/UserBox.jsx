@@ -88,7 +88,7 @@ var Login = createReactClass({
             <h5 className="margin-0">Login</h5>
             <div
               className="hyperbutton"
-              onClick={this.goSignup}>
+              onClick={() => this.goSignup()}>
                Signup
             </div>
           </div>
@@ -99,18 +99,18 @@ var Login = createReactClass({
 
           <span>Password:</span>
           <input
-            onKeyDown={this.checkEnter}
+            onKeyDown={() => this.checkEnter()}
             ref="password"
             type="password"/>
           <div className="flex-right">
             <div
               className="hyperbutton"
-              onClick={this.handleLogin}>
+              onClick={() => this.handleLogin()}>
                 Submit
             </div>
             <div
               className="hyperbutton"
-              onClick={this.expandToggle}>
+              onClick={() => this.expandToggle()}>
                 Cancel
             </div>
           </div>
@@ -126,7 +126,7 @@ var Login = createReactClass({
           <h5 className="margin-0">Signup</h5>
           <div
             className="hyperbutton"
-            onClick={this.goLogin}>
+            onClick={() => this.goLogin()}>
              Login
           </div>
         </div>
@@ -144,18 +144,18 @@ var Login = createReactClass({
 
             <span>Confirm password:</span>
             <input
-              onKeyDown={this.checkEnter}
+              onKeyDown={() => this.checkEnter()}
               ref="password"
               type="password" />
             <div className="flex-right">
               <div
                 className="hyperbutton"
-                onClick={this.handleSignup}>
+                onClick={() => this.handleSignup()}>
                   Signup
               </div>
               <div
                 className="hyperbutton"
-                onClick={this.expandToggle}>
+                onClick={() => this.expandToggle()}>
                   Cancel
               </div>
             </div>
@@ -167,7 +167,7 @@ var Login = createReactClass({
 
     return (
       <div className="LoginBox">
-        <div onClick={this.expandToggle} className="hyperbutton navbar-text">Sign in/up</div>
+        <div onClick={() => this.expandToggle()} className="hyperbutton navbar-text">Sign in/up</div>
         {dropdown}
       </div>
     );
@@ -222,17 +222,17 @@ var User = createReactClass({
           <div className="flex-container">
             <div
               className="hyperbutton"
-              onClick={this.handleAddAvatarClick}>
+              onClick={() => this.handleAddAvatarClick()}>
                 Change avatar
             </div>
             <div
               className="hyperbutton"
-              onClick={this.handleLogout}>
+              onClick={() => this.handleLogout()}>
                 Logout
             </div>
             <div
               className="hyperbutton"
-              onClick={this.expandToggle}>
+              onClick={() => this.expandToggle()}>
                 Cancel
             </div>
 
@@ -245,10 +245,10 @@ var User = createReactClass({
       dropdown = (
         <div className="login-dropdown card">
           <h5 className="margin-0">Upload new avatar:</h5>
-          <S3Uploader size={80} onFinish={this.handleUploadComplete}/>
+          <S3Uploader size={80} onFinish={() => this.handleUploadComplete()}/>
           <div
             className="hyperbutton"
-            onClick={this.expandToggle}>
+            onClick={() => this.expandToggle()}>
               Cancel
           </div>
 
@@ -257,7 +257,7 @@ var User = createReactClass({
     }
 
     return (
-      <div onClick={this.expandToggle} className="UserBox">
+      <div onClick={() => this.expandToggle()} className="UserBox">
         <img className="img-responsive nava-ava" src={avatar} />
         <div className="navbar-text navbar-user">
           <div className="username">

@@ -37,5 +37,10 @@
     "eject": "react-scripts eject",
     "postinstall": "yarn build",
     "serve-prod": "./node_modules/.bin/babel server --out-dir serverbuild && node ./serverbuild/server.js"
+  },
+  "prettier": {
+      "printWidth": 100,
+      "singleQuote": true,
+      "trailingComma": "all"
   }
 }
