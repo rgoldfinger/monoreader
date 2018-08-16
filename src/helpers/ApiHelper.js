@@ -3,7 +3,7 @@ import LoginStore from '../stores/LoginStore';
 export default function(requestType, requestURL, data, callback) {
   var request, token;
   request = new XMLHttpRequest();
-  console.log({url: `${process.env.REACT_APP_BASE_URL}/api/${requestURL}`})
+  console.log({ url: `${process.env.REACT_APP_BASE_URL}/api/${requestURL}` });
   request.open(requestType, `${process.env.REACT_APP_BASE_URL}/api/${requestURL}`, true);
   // request.open(requestType, 'http://readitlive.net:80/api/' + requestURL, true);
   request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
@@ -28,4 +28,4 @@ export default function(requestType, requestURL, data, callback) {
   request.onerror = function(err) {
     return callback(err, request);
   };
-};
+}

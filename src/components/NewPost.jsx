@@ -10,7 +10,7 @@ var NewPost = createReactClass({
     submitAction: PropTypes.func.isRequired,
     imageUpload: PropTypes.bool,
     handleCancel: PropTypes.func,
-    customAction: PropTypes.object
+    customAction: PropTypes.object,
   },
 
   handleSubmit(e) {
@@ -29,9 +29,11 @@ var NewPost = createReactClass({
   },
 
   handleImageUpload(signingData) {
-    this.refs.text.value = this.refs.text.value +
+    this.refs.text.value =
+      this.refs.text.value +
       '<img src="https://liveblogphotos2.s3-us-west-2.amazonaws.com/' +
-      signingData.filename + '" class="post-image"></img>';
+      signingData.filename +
+      '" class="post-image"></img>';
   },
 
   onCancel(e) {
@@ -42,7 +44,9 @@ var NewPost = createReactClass({
 
   renderCancel() {
     return (
-      <div className="hyperbutton" onClick={() => this.onCancel()}>Cancel</div>
+      <div className="hyperbutton" onClick={() => this.onCancel()}>
+        Cancel
+      </div>
     );
   },
 
@@ -57,8 +61,7 @@ var NewPost = createReactClass({
 
   renderCustom() {
     return (
-      <div onClick={() => this.handleCustom()}
-        className="hyperbutton">
+      <div onClick={() => this.handleCustom()} className="hyperbutton">
         {this.props.customAction.label}
       </div>
     );
@@ -68,17 +71,23 @@ var NewPost = createReactClass({
     return (
       <div className="NewPost">
         <form className="body-text text-area flex-right" role="form">
-          <textarea className="card" onKeyDown={() => this.checkSubmit()} ref="text"></textarea>
+          <textarea className="card" onKeyDown={() => this.checkSubmit()} ref="text" />
         </form>
         <div className="flex-right">
-          {this.props.imageUpload && <S3Uploader onFinish={() => this.handleImageUpload()}/>}
+          {this.props.imageUpload && <S3Uploader onFinish={() => this.handleImageUpload()} />}
           {this.props.handleCancel && this.renderCancel()}
           {this.props.customAction && this.renderCustom()}
-          <div style={{color: "#c41a18"}} className="hyperbutton" onClick={() => this.handleSubmit()}>Comment</div>
+          <div
+            style={{ color: '#c41a18' }}
+            className="hyperbutton"
+            onClick={() => this.handleSubmit()}
+          >
+            Comment
+          </div>
         </div>
       </div>
     );
-  }
+  },
 });
 
 export default NewPost;

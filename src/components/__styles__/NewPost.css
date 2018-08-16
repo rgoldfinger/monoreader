@@ -1,18 +1,18 @@
 .NewPost {
-	max-width: 800px;
-	margin: auto;
+  max-width: 800px;
+  margin: auto;
 }
 
 .NewPost .text-area {
-	margin: 0 0 0 20px;
+  margin: 0 0 0 20px;
 }
 
 .NewPost .card {
-	margin-top: 30px;
+  margin-top: 30px;
 }
 
 .NewPost textarea {
-	width: 100%;
-	height: 150px;
-	resize: none;
+  width: 100%;
+  height: 150px;
+  resize: none;
 }

@@ -22,7 +22,7 @@ var ViewerCountStore = assign({}, EventEmitter.prototype, {
   },
   getViewerCount: function() {
     return _count;
-  }
+  },
 });
 
 ViewerCountStore.dispatcherToken = AppDispatcher.register(function(payload) {
@@ -30,7 +30,7 @@ ViewerCountStore.dispatcherToken = AppDispatcher.register(function(payload) {
   action = payload.action;
   switch (action.actionType) {
     case constants.UPDATE_VIEWER_COUNT:
-      _count = action.data.viewerCount
+      _count = action.data.viewerCount;
       ViewerCountStore.emitChange();
       break;
   }

@@ -9,7 +9,7 @@ var CommentsActions = {
     API('DELETE', 'event/' + comment.eventId + '/comment/' + comment._id, {}, () => {
       return AppDispatcher.handleServerAction({
         actionType: constants.DELETE_COMMENT,
-        commentId: comment._id
+        commentId: comment._id,
       });
     });
   },
@@ -18,7 +18,7 @@ var CommentsActions = {
     if (err) return console.log(err);
     return AppDispatcher.handleServerAction({
       actionType: constants.RECEIVE_COMMENTS,
-      data: data
+      data: data,
     });
   },
 
@@ -30,7 +30,7 @@ var CommentsActions = {
       postText: postText,
       eventId: eventId,
       author: user.username,
-      avatarUrl: user.profile && user.profile.avatarUrl
+      avatarUrl: user.profile && user.profile.avatarUrl,
     };
     API('POST', 'event/' + eventId + '/comment', data, () => {});
   },
@@ -40,7 +40,7 @@ var CommentsActions = {
       postText: comment.postText,
       eventId: comment.eventId,
       author: comment.author,
-      avatarUrl: comment.avatarUrl
+      avatarUrl: comment.avatarUrl,
     };
 
     API('POST', 'event/' + comment.eventId, data, () => {

@@ -1,79 +1,79 @@
 .post {
-	margin: 22px 0;
+  margin: 22px 0;
 }
 
 .post .meta {
-	margin-bottom: 0;
-	color: #333;
-	clear: both;
-	font-family: AvenirNext-DemiBold, Helvetica, sans-serif;
-	font-size: 14px;
+  margin-bottom: 0;
+  color: #333;
+  clear: both;
+  font-family: AvenirNext-DemiBold, Helvetica, sans-serif;
+  font-size: 14px;
 }
 
 .post .meta-time {
-	margin-bottom: 0;
-	color: #666;
-	font-size: 12px;
+  margin-bottom: 0;
+  color: #666;
+  font-size: 12px;
 }
 
 .post .metadata-area {
-	margin: 0 8px;
+  margin: 0 8px;
 }
 
 @media (max-width: 400px) {
-	.post .metadata-area {
-		width: 40px;
-	}
+  .post .metadata-area {
+    width: 40px;
+  }
 }
 
 .post .avatar-pic {
-	border-radius: 2px;
+  border-radius: 2px;
 }
 
 @media (max-width: 400px) {
-	.post .avatar-pic {
-		width: 40px;
-		height: 40px;
-	}
+  .post .avatar-pic {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .post .body-text {
-	word-break: normal;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	white-space: pre-wrap;
-	margin-bottom: 0;
+  word-break: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  margin-bottom: 0;
 }
 
 .post .post-image {
-	max-width: 100%;
+  max-width: 100%;
 }
 
 .post .post-admin button {
-	display: inherit;
+  display: inherit;
 }
 
 .post textarea {
-	height: 200px;
-	width: 600px;
-	resize: none;
+  height: 200px;
+  width: 600px;
+  resize: none;
 }
 
 .post .reply .card {
-	background-color: #efefef;
+  background-color: #efefef;
 }
 /*responsive embedded video*/
 .video-container {
-	position: relative;
-	padding-bottom: 56.25%;
+  position: relative;
+  padding-bottom: 56.25%;
 }
 
 .video-container iframe,
 .video-container object,
 .video-container embed {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

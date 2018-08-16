@@ -10,10 +10,10 @@ var UserBox = createReactClass({
   render() {
     return (
       <div className="UserArea">
-        {!this.props.user ? <Login /> : <User user={this.props.user}/>}
+        {!this.props.user ? <Login /> : <User user={this.props.user} />}
       </div>
     );
-  }
+  },
 });
 
 var Login = createReactClass({
@@ -24,7 +24,7 @@ var Login = createReactClass({
       username: '',
       password: '',
       confirmPassword: '',
-      errorMessage: LoginStore.getLoginError()
+      errorMessage: LoginStore.getLoginError(),
     };
   },
   componentDidMount() {
@@ -36,7 +36,7 @@ var Login = createReactClass({
   checkStores() {
     if (this.isMounted()) {
       this.setState({
-        errorMessage: LoginStore.getLoginError()
+        errorMessage: LoginStore.getLoginError(),
       });
     }
   },
@@ -44,31 +44,31 @@ var Login = createReactClass({
   expandToggle() {
     this.setState({
       expanded: !this.state.expanded,
-      signup: false
+      signup: false,
     });
   },
 
   goSignup() {
     this.setState({
-      signup: true
-    })
+      signup: true,
+    });
   },
 
   goLogin() {
     this.setState({
-      signup: false
-    })
+      signup: false,
+    });
   },
 
   handleLogin() {
     var username = this.refs.username.value;
-    var password =  this.refs.password.value;
+    var password = this.refs.password.value;
     LoginActions.loginUser(username, password);
   },
 
   handleSignup() {
     var username = this.refs.username.value;
-    var password =  this.refs.password.value;
+    var password = this.refs.password.value;
     LoginActions.signupUser(username, password);
   },
 
@@ -81,85 +81,64 @@ var Login = createReactClass({
   render() {
     var dropdown;
     if (this.state.expanded) {
-
       dropdown = (
         <div className="login-dropdown card">
           <div className="flex-container">
             <h5 className="margin-0">Login</h5>
-            <div
-              className="hyperbutton"
-              onClick={() => this.goSignup()}>
-               Signup
+            <div className="hyperbutton" onClick={() => this.goSignup()}>
+              Signup
             </div>
           </div>
           <span>Username:</span>
-          <input
-            type="email"
-            ref="username" />
+          <input type="email" ref="username" />
 
           <span>Password:</span>
-          <input
-            onKeyDown={() => this.checkEnter()}
-            ref="password"
-            type="password"/>
+          <input onKeyDown={() => this.checkEnter()} ref="password" type="password" />
           <div className="flex-right">
-            <div
-              className="hyperbutton"
-              onClick={() => this.handleLogin()}>
-                Submit
+            <div className="hyperbutton" onClick={() => this.handleLogin()}>
+              Submit
             </div>
-            <div
-              className="hyperbutton"
-              onClick={() => this.expandToggle()}>
-                Cancel
+            <div className="hyperbutton" onClick={() => this.expandToggle()}>
+              Cancel
             </div>
           </div>
-        {/*<button onClick={() => window.location.pathname = '/api/auth/facebook'} className="btn-facebook">Login with Facebook</button>*/}
-          {this.state.errorMessage && <span style={{color: '#FF9494'}}>{this.state.errorMessage}</span>}
+          {/*<button onClick={() => window.location.pathname = '/api/auth/facebook'} className="btn-facebook">Login with Facebook</button>*/}
+          {this.state.errorMessage && (
+            <span style={{ color: '#FF9494' }}>{this.state.errorMessage}</span>
+          )}
         </div>
       );
     }
     if (this.state.signup && this.state.expanded) {
       dropdown = (
         <div className="login-dropdown card">
-        <div className="flex-container">
-          <h5 className="margin-0">Signup</h5>
-          <div
-            className="hyperbutton"
-            onClick={() => this.goLogin()}>
-             Login
+          <div className="flex-container">
+            <h5 className="margin-0">Signup</h5>
+            <div className="hyperbutton" onClick={() => this.goLogin()}>
+              Login
+            </div>
           </div>
-        </div>
 
           <div>
             <span>Username:</span>
-            <input
-              type="email"
-              ref="username" />
+            <input type="email" ref="username" />
 
             <span>Password:</span>
-            <input
-              ref="password"
-              type="password" />
+            <input ref="password" type="password" />
 
             <span>Confirm password:</span>
-            <input
-              onKeyDown={() => this.checkEnter()}
-              ref="password"
-              type="password" />
+            <input onKeyDown={() => this.checkEnter()} ref="password" type="password" />
             <div className="flex-right">
-              <div
-                className="hyperbutton"
-                onClick={() => this.handleSignup()}>
-                  Signup
+              <div className="hyperbutton" onClick={() => this.handleSignup()}>
+                Signup
               </div>
-              <div
-                className="hyperbutton"
-                onClick={() => this.expandToggle()}>
-                  Cancel
+              <div className="hyperbutton" onClick={() => this.expandToggle()}>
+                Cancel
               </div>
             </div>
-            {this.state.errorMessage && <span style={{color: '#FF9494'}}>{this.state.errorMessage}</span>}
+            {this.state.errorMessage && (
+              <span style={{ color: '#FF9494' }}>{this.state.errorMessage}</span>
+            )}
           </div>
         </div>
       );
@@ -167,27 +146,27 @@ var Login = createReactClass({
 
     return (
       <div className="LoginBox">
-        <div onClick={() => this.expandToggle()} className="hyperbutton navbar-text">Sign in/up</div>
+        <div onClick={() => this.expandToggle()} className="hyperbutton navbar-text">
+          Sign in/up
+        </div>
         {dropdown}
       </div>
     );
-
-  }
-
+  },
 });
 
 var User = createReactClass({
   getInitialState() {
     return {
       expanded: false,
-      avatarAdd: false
+      avatarAdd: false,
     };
   },
 
   expandToggle() {
     this.setState({
       expanded: !this.state.expanded,
-      avatarAdd: false
+      avatarAdd: false,
     });
   },
 
@@ -198,44 +177,37 @@ var User = createReactClass({
   handleAddAvatarClick(e) {
     e.stopPropagation();
     this.setState({
-      avatarAdd: true
+      avatarAdd: true,
     });
   },
 
   handleUploadComplete(data) {
-    LoginActions.updateAvatar(data)
+    LoginActions.updateAvatar(data);
     this.setState({
       avatarAdd: false,
-      expanded: false
+      expanded: false,
     });
   },
 
   render() {
-    var avatar = (this.props.user.profile && this.props.user.profile.avatarUrl) || constants.Default_Avatar;
+    var avatar =
+      (this.props.user.profile && this.props.user.profile.avatarUrl) || constants.Default_Avatar;
 
     var dropdown;
 
     if (this.state.expanded) {
-
       dropdown = (
         <div className="login-dropdown">
           <div className="flex-container">
-            <div
-              className="hyperbutton"
-              onClick={() => this.handleAddAvatarClick()}>
-                Change avatar
+            <div className="hyperbutton" onClick={() => this.handleAddAvatarClick()}>
+              Change avatar
             </div>
-            <div
-              className="hyperbutton"
-              onClick={() => this.handleLogout()}>
-                Logout
+            <div className="hyperbutton" onClick={() => this.handleLogout()}>
+              Logout
             </div>
-            <div
-              className="hyperbutton"
-              onClick={() => this.expandToggle()}>
-                Cancel
+            <div className="hyperbutton" onClick={() => this.expandToggle()}>
+              Cancel
             </div>
-
           </div>
         </div>
       );
@@ -245,13 +217,10 @@ var User = createReactClass({
       dropdown = (
         <div className="login-dropdown card">
           <h5 className="margin-0">Upload new avatar:</h5>
-          <S3Uploader size={80} onFinish={() => this.handleUploadComplete()}/>
-          <div
-            className="hyperbutton"
-            onClick={() => this.expandToggle()}>
-              Cancel
+          <S3Uploader size={80} onFinish={() => this.handleUploadComplete()} />
+          <div className="hyperbutton" onClick={() => this.expandToggle()}>
+            Cancel
           </div>
-
         </div>
       );
     }
@@ -260,14 +229,12 @@ var User = createReactClass({
       <div onClick={() => this.expandToggle()} className="UserBox">
         <img className="img-responsive nava-ava" src={avatar} />
         <div className="navbar-text navbar-user">
-          <div className="username">
-            {this.props.user.username}
-          </div>
+          <div className="username">{this.props.user.username}</div>
         </div>
         {dropdown}
       </div>
     );
-  }
+  },
 });
 
 export default UserBox;

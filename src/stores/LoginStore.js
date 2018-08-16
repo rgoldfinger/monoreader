@@ -1,4 +1,3 @@
-
 import * as R from 'ramda';
 import assign from 'object-assign';
 import { EventEmitter } from 'events';
@@ -73,7 +72,7 @@ var LoginStore = assign({}, EventEmitter.prototype, {
     if (!_currentUser || !_currentUser.username || !event.adminUsers) return false;
     var index = R.indexOf(_currentUser.username, event.adminUsers);
     return index >= 0;
-  }
+  },
 });
 
 LoginStore.dispatcherToken = AppDispatcher.register(function(payload) {

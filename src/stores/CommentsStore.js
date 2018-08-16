@@ -33,7 +33,7 @@ var CommentsStore = assign({}, EventEmitter.prototype, {
       return R.reverse(sortedComments);
     }
     return [];
-  }
+  },
 });
 
 CommentsStore.dispatcherToken = AppDispatcher.register(function(payload) {

@@ -12,23 +12,28 @@ var WSHelper = {
     // sock = new SockJS('https://glacial-journey-58935.herokuapp.com:3080/ws');
     reconnect = true;
     sock.onmessage = function(e) {
-        callback(JSON.parse(e.data));
+      callback(JSON.parse(e.data));
     };
 
     sock.onerror = function(err) {
       console.log('socket error: ', err);
     };
     sock.onopen = function() {
-      sock.send(JSON.stringify({
-        eventId: eventId,
-        userId: LoginStore.getCurrentUser() && LoginStore.getCurrentUser()._id
-      }));
+      sock.send(
+        JSON.stringify({
+          eventId: eventId,
+          userId: LoginStore.getCurrentUser() && LoginStore.getCurrentUser()._id,
+        }),
+      );
     };
     sock.onclose = function() {
       if (reconnect && EventStore.eventIsLive()) {
         setTimeout(() => {
           PostsStore.init(eventId);
-          WSHelper.connect(eventId, callback);
+          WSHelper.connect(
+            eventId,
+            callback,
+          );
         }, 5000);
       }
     };
@@ -40,7 +45,7 @@ var WSHelper = {
   close() {
     reconnect = false;
     sock.close();
-  }
+  },
 };
 
 export default WSHelper;

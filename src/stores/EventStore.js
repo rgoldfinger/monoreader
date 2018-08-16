@@ -32,7 +32,7 @@ var EventStore = assign({}, EventEmitter.prototype, {
 
   eventIsLive: function() {
     return !!_event.eventIsLive;
-  }
+  },
 });
 
 EventStore.dispatcherToken = AppDispatcher.register(function(payload) {

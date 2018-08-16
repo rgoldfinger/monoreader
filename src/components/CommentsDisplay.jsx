@@ -8,7 +8,7 @@ import './__styles__/CommentsDisplay.css';
 
 var CommentEntry = createReactClass({
   propTypes: {
-    comment: PropTypes.object.isRequired
+    comment: PropTypes.object.isRequired,
   },
 
   handleDelete(e) {
@@ -27,8 +27,12 @@ var CommentEntry = createReactClass({
     return (
       <div className="CommentEntry">
         <div className="flex-right">
-          <div onClick={() => this.handleDelete()} className="hyperbutton">Delete</div>
-          <div onClick={() => this.handlePost()} className="hyperbutton">Post</div>
+          <div onClick={() => this.handleDelete()} className="hyperbutton">
+            Delete
+          </div>
+          <div onClick={() => this.handlePost()} className="hyperbutton">
+            Post
+          </div>
         </div>
         <div className="flex-start">
           <img src={avatar} height="40" width="40" />
@@ -39,26 +43,23 @@ var CommentEntry = createReactClass({
         </div>
       </div>
     );
-  }
-
+  },
 });
 
-
 var CommentsDisplay = createReactClass({
-
   contextTypes: {
-    router: PropTypes.object
+    router: PropTypes.object,
   },
 
   getInitialState() {
     return {
-      comments: CommentsStore.getComments()
+      comments: CommentsStore.getComments(),
     };
   },
 
   componentDidMount() {
     CommentsStore.addChangeListener(this.onStoreChange);
-    CommentsStore.init(this.context.router.route.match.params.eventId)
+    CommentsStore.init(this.context.router.route.match.params.eventId);
   },
 
   componentWillUnmount() {
@@ -66,13 +67,11 @@ var CommentsDisplay = createReactClass({
   },
 
   onStoreChange() {
-    this.setState({comments: CommentsStore.getComments()});
+    this.setState({ comments: CommentsStore.getComments() });
   },
 
   renderComment(comment, i) {
-    return (
-      <CommentEntry comment={comment} isAdmin={this.props.isAdmin} key={i}/>
-    )
+    return <CommentEntry comment={comment} isAdmin={this.props.isAdmin} key={i} />;
   },
 
   render() {
@@ -81,7 +80,7 @@ var CommentsDisplay = createReactClass({
         {this.state.comments && this.state.comments.map(this.renderComment)}
       </div>
     );
-  }
+  },
 });
 
 export default CommentsDisplay;

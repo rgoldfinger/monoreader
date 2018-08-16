@@ -9,7 +9,7 @@ var PostActionsCreators = {
     if (err) return console.log(err);
     return AppDispatcher.handleServerAction({
       actionType: constants.RECEIVE_POSTS,
-      data: data
+      data: data,
     });
   },
 
@@ -17,7 +17,7 @@ var PostActionsCreators = {
     if (err) return console.log(err);
     return AppDispatcher.handleServerAction({
       actionType: constants.RECEIVE_POST,
-      data: data
+      data: data,
     });
   },
 
@@ -27,7 +27,7 @@ var PostActionsCreators = {
 
     if (!embed) {
       postText = postText.replace(/(www\..+?)(\s|$)/g, function(text, link) {
-         return '<a href="http://'+ link +'"target="_blank">'+ link +'</a>';
+        return '<a href="http://' + link + '"target="_blank">' + link + '</a>';
       });
     } else {
       postText = '<div class="video-container">' + postText + '</div>';
@@ -38,7 +38,7 @@ var PostActionsCreators = {
       eventId: eventId,
       postIsComment: false,
       author: user.username,
-      avatarUrl: user.profile && user.profile.avatarUrl
+      avatarUrl: user.profile && user.profile.avatarUrl,
     };
     API('POST', 'event/' + eventId, data, () => {});
   },
@@ -46,7 +46,7 @@ var PostActionsCreators = {
   update(entryId, newPostText, callback) {
     var eventId = EventStore.getEvent()._id;
     var data = {
-      postText: newPostText
+      postText: newPostText,
     };
     API('PUT', 'event/' + eventId + '/entry/' + entryId, data, callback);
   },
@@ -61,7 +61,7 @@ var PostActionsCreators = {
     var reply = {
       postText: replyText,
       author: user.username,
-      avatarUrl: user.profile && user.profile.avatarUrl
+      avatarUrl: user.profile && user.profile.avatarUrl,
     };
     if (entry.replies && entry.replies.length) {
       entry.replies.push(reply);

@@ -8,7 +8,7 @@ var LoginActionsCreators = {
     var data;
     data = {
       username: username,
-      password: password
+      password: password,
     };
     return ApiHelper('POST', 'auth/login', data, LoginActionsCreators.receiveUserLogin);
   },
@@ -16,13 +16,12 @@ var LoginActionsCreators = {
     var data;
     data = {
       username: username,
-      password: password
+      password: password,
     };
     return ApiHelper('POST', 'auth/signup', data, LoginActionsCreators.receiveUserLogin);
   },
   updateAvatar(signingData) {
-    var avatarUrl =
-      'https://liveblogphotos2.s3-us-west-2.amazonaws.com/' + signingData.filename;
+    var avatarUrl = 'https://liveblogphotos2.s3-us-west-2.amazonaws.com/' + signingData.filename;
     var user = LoginStore.getCurrentUser();
     user.profile = user.profile || {};
     user.profile.avatarUrl = avatarUrl;
@@ -31,13 +30,13 @@ var LoginActionsCreators = {
   },
   logoutUser() {
     return AppDispatcher.handleServerAction({
-      actionType: constants.LOGOUT_USER
+      actionType: constants.LOGOUT_USER,
     });
   },
   receiveUser(error, data) {
     return AppDispatcher.handleServerAction({
       actionType: constants.RECEIVE_USER,
-      user: data
+      user: data,
     });
   },
   receiveUserLogin(error, data) {
@@ -46,7 +45,7 @@ var LoginActionsCreators = {
         data = JSON.parse(data.responseText);
         return AppDispatcher.handleServerAction({
           actionType: constants.RECEIVE_LOGIN_ERROR,
-          message: data.message
+          message: data.message,
         });
       } catch (e) {
         data = {};
@@ -56,10 +55,10 @@ var LoginActionsCreators = {
         actionType: constants.RECEIVE_LOGIN_USER,
         user: data.user,
         token: data.token,
-        exp: data.expires
+        exp: data.expires,
       });
     }
-  }
+  },
 };
 
 export default LoginActionsCreators;

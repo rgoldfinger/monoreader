@@ -38,7 +38,7 @@ var PostsStore = assign({}, EventEmitter.prototype, {
       }
     }
     return [];
-  }
+  },
 });
 
 PostsStore.dispatcherToken = AppDispatcher.register(function(payload) {

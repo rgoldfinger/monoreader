@@ -1,4 +1,3 @@
-
 export default {
   RECEIVE_LOGIN_USER: 'RECEIVE_LOGIN_USER',
   RECEIVE_LOGIN_ERROR: 'RECEIVE_LOGIN_ERROR',
@@ -14,5 +13,5 @@ export default {
   RECEIVE_COMMENT: 'RECEIVE_COMMENT',
   RECEIVE_COMMENTS: 'RECEIVE_COMMENTS',
   DELETE_COMMENT: 'DELETE_COMMENT',
-  Default_Avatar: '/img/default-avatar.png'
+  Default_Avatar: '/img/default-avatar.png',
 };

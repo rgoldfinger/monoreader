@@ -6,7 +6,7 @@ var EventActions = {
   receiveEvent(err, data) {
     return AppDispatcher.handleServerAction({
       actionType: constants.RECEIVE_EVENT,
-      event: data
+      event: data,
     });
   },
 
@@ -15,12 +15,12 @@ var EventActions = {
     API('PUT', 'event/' + event._id, event, EventActions.receiveEvent);
     return AppDispatcher.handleViewAction({
       actionType: constants.EVENT_LIVE_TOGGLE,
-      event: event
+      event: event,
     });
   },
   delete(event, callback) {
     API('DELETE', 'event/' + event._id, event, callback);
-  }
+  },
 };
 
 export default EventActions;

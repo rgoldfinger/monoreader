@@ -23,9 +23,9 @@ var WriteApp = createReactClass({
         event: EventStore.getEvent(),
         user: LoginStore.getCurrentUser(),
         isAdmin: LoginStore.userIsAdmin(EventStore.getEvent()),
-        postsData: PostsStore.getPosts()
+        postsData: PostsStore.getPosts(),
       };
-    }
+    },
   },
 
   getInitialState() {
@@ -34,32 +34,33 @@ var WriteApp = createReactClass({
 
   componentWillMount() {
     var eventId = this.props.match.params.eventId;
-    this.setState({eventId});
-
+    this.setState({ eventId });
   },
 
   componentDidMount() {
-    const {eventId} = this.state;
+    const { eventId } = this.state;
     EventStore.init(eventId);
     PostsStore.init(eventId);
     EventStore.addChangeListener(this.handleStoreChange);
     LoginStore.addChangeListener(this.handleStoreChange);
     PostsStore.addChangeListener(this.handleStoreChange);
-    console.log({SocketActions})
-    WSHelper.connect(eventId, SocketActions.receiveUpdate);
+    console.log({ SocketActions });
+    WSHelper.connect(
+      eventId,
+      SocketActions.receiveUpdate,
+    );
   },
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.event._id !== this.state.event._id) {
       window.document.title = nextState.event.eventTitle;
     }
-
   },
 
   componentDidUpdate() {
     var eventId = this.props.match.params.eventId;
     if (eventId !== this.state.eventId) {
-      this.setState({eventId});
+      this.setState({ eventId });
       EventStore.init(eventId);
       PostsStore.init(eventId);
     }
@@ -81,20 +82,25 @@ var WriteApp = createReactClass({
 
     return (
       <div>
-        <TopBar event={this.state.event} user={this.state.user} isAdmin={this.state.isAdmin}/>
-        {this.state.user &&
+        <TopBar event={this.state.event} user={this.state.user} isAdmin={this.state.isAdmin} />
+        {this.state.user && (
           <NewPost
             imageUpload={isAdmin}
             submitAction={isAdmin ? PostsActions.submit : CommentsActions.submit}
-            customAction={isAdmin ? {label: "<Embed>", action: (postText) => PostsActions.submit(postText, true)} : {}}/>
-        }
+            customAction={
+              isAdmin
+                ? { label: '<Embed>', action: postText => PostsActions.submit(postText, true) }
+                : {}
+            }
+          />
+        )}
         <div className="flex-box">
-          <Feed isAdmin={this.state.isAdmin} postsData={this.state.postsData}/>
+          <Feed isAdmin={this.state.isAdmin} postsData={this.state.postsData} />
           {isAdmin && <CommentsDisplay />}
         </div>
       </div>
     );
-  }
+  },
 });
 
 export default WriteApp;
