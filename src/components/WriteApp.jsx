@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import createReactClass from 'create-react-class';
-import * as R from 'ramda';
 
 // var LoginStore = require('../stores/LoginStore');
 import PostsStore from '../stores/PostsStore';
@@ -37,15 +35,18 @@ var WriteApp = createReactClass({
   componentWillMount() {
     var eventId = this.props.match.params.eventId;
     this.setState({eventId});
-    EventStore.init(eventId);
-    PostsStore.init(eventId);
-    WSHelper.connect(eventId, SocketActions.receiveUpdate);
+
   },
 
   componentDidMount() {
+    const {eventId} = this.state;
+    EventStore.init(eventId);
+    PostsStore.init(eventId);
     EventStore.addChangeListener(this.handleStoreChange);
     LoginStore.addChangeListener(this.handleStoreChange);
     PostsStore.addChangeListener(this.handleStoreChange);
+    console.log({SocketActions})
+    WSHelper.connect(eventId, SocketActions.receiveUpdate);
   },
 
   componentWillUpdate(nextProps, nextState) {

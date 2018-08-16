@@ -1,5 +1,6 @@
 // https://github.com/odysseyscience/react-s3-uploader
 var React = require('react');
+var ReactDOM = require('react-dom');
 var PropTypes = require('prop-types');
 var createReactClass = require('create-react-class');
 var S3Upload = require('./s3upload.js');
@@ -40,7 +41,13 @@ var ReactS3Uploader = createReactClass({
     },
 
     render: function() {
-      return React.DOM.input(objectAssign({}, this.props, {type: 'file', onChange: this.uploadFile, onClick: (e) => e.stopPropagation()}));
+      return (<input type="file" onChange={this.uploadFile} onClick={(e) => e.stopPropagation()}>
+
+      </input>);
+      // // return ReactDOM.input(objectAssign({}, this.props, {
+      // type: 'file',
+      // onChange: this.uploadFile,
+      // onClick: }
     }
 
 });

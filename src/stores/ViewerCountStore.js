@@ -1,12 +1,7 @@
 import assign from 'object-assign';
 import { EventEmitter } from 'events';
-import * as R from 'ramda';
 import AppDispatcher from '../dispatchers/appDispatcher';
-import WSHelper from '../helpers/WSHelper';
-import API from '../helpers/ApiHelper';
 import constants from '../constants/constants';
-import PostsActions from '../actions/PostsActions';
-
 var CHANGE_EVENT = 'change';
 
 var _count = 0;

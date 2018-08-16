@@ -1,5 +1,4 @@
 import React from 'react';
-import * as R from 'ramda';
 import PropTypes from 'prop-types';
 import createReactClass from 'create-react-class';
 import CommentsStore from '../stores/CommentsStore';
@@ -48,7 +47,7 @@ var CommentEntry = createReactClass({
 var CommentsDisplay = createReactClass({
 
   contextTypes: {
-    router: PropTypes.func
+    router: PropTypes.object
   },
 
   getInitialState() {
@@ -59,7 +58,7 @@ var CommentsDisplay = createReactClass({
 
   componentDidMount() {
     CommentsStore.addChangeListener(this.onStoreChange);
-    CommentsStore.init(this.context.router.getCurrentParams().eventId)
+    CommentsStore.init(this.context.router.route.match.params.eventId)
   },
 
   componentWillUnmount() {

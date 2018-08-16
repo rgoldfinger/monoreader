@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 var app = express();
 import bodyParser from 'body-parser';
@@ -353,3 +354,4 @@ db.once('open', function() {
 });
 
 app.listen(PORT);
+console.log(`Server running on port ${PORT}`)

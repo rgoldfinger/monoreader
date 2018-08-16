@@ -26,11 +26,12 @@ var Event = createReactClass({
 
 var NewEvent = createReactClass({
   contextTypes: {
-    router: PropTypes.func
+    router: PropTypes.object
   },
 
   create() {
-    var title = this.refs.title.value;
+    var title = this.state.title;
+    const {router} = this.context;
     if (title) {
       API('POST', 'event', {eventTitle: title}, (err, data) => {
         if (err) {
@@ -38,7 +39,8 @@ var NewEvent = createReactClass({
           return;
         }
         //TODO send admin users
-        this.context.router.transitionTo('write', {eventId: data._id});
+        const location = router.history.location;
+        router.history.push({...location, pathname: `write/${data._id}`});
       });
     }
   },
@@ -48,8 +50,8 @@ var NewEvent = createReactClass({
       <div>
         <div className="row card post flex-box">
           <div>Create New Event:</div>
-          <input ref="title" placeholder="Event Name" style={{margin: "0 12px"}} className="flex-1"/>
-          <div className="hyperbutton" onClick={this.create}>Create</div>
+          <input onChange={(e) => this.setState({title: e.target.value})} placeholder="Event Name" style={{margin: "0 12px"}} className="flex-1"/>
+          <div className="hyperbutton" onClick={() => this.create()}>Create</div>
         </div>
       </div>
     );

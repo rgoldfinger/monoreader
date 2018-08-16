@@ -9,13 +9,11 @@ var CHANGE_EVENT = 'change';
 
 var _currentUser;
 var _authToken;
-var _exp;
 var _loginError;
 
 var _loginUser = function(userData, authToken, exp) {
   _currentUser = userData;
   _authToken = authToken;
-  _exp = exp;
   window.localStorage.setItem('ril-auth-token', authToken);
   window.localStorage.setItem('ril-current-user', JSON.stringify(userData));
   if (exp) {
@@ -31,7 +29,6 @@ var _updateUser = function(userData) {
 var _logoutUser = function() {
   _currentUser = null;
   _authToken = null;
-  _exp = null;
   window.localStorage.removeItem('ril-auth-token');
   window.localStorage.removeItem('ril-current-user');
   window.localStorage.removeItem('ril-auth-exp');
@@ -52,7 +49,6 @@ var LoginStore = assign({}, EventEmitter.prototype, {
     } else {
       _currentUser = userData;
       _authToken = authToken;
-      _exp = exp;
     }
   },
   emitChange: function() {

@@ -1,5 +1,4 @@
 import React from 'react';
-import * as R from 'ramda';
 import PropTypes from 'prop-types';
 import createReactClass from 'create-react-class';
 
