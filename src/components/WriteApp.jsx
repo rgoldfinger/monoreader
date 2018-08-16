@@ -1,7 +1,4 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
-
-// var LoginStore = require('../stores/LoginStore');
 import PostsStore from '../stores/PostsStore';
 
 import EventStore from '../stores/EventStore';
@@ -16,26 +13,22 @@ import Feed from './Feed';
 import CommentsDisplay from './CommentsDisplay';
 import './__styles__/App.css';
 
-var WriteApp = createReactClass({
-  statics: {
-    getStateFromStores() {
-      return {
-        event: EventStore.getEvent(),
-        user: LoginStore.getCurrentUser(),
-        isAdmin: LoginStore.userIsAdmin(EventStore.getEvent()),
-        postsData: PostsStore.getPosts(),
-      };
-    },
-  },
+class WriteApp extends React.Component {
+  static getStateFromStores() {
+    return {
+      event: EventStore.getEvent(),
+      user: LoginStore.getCurrentUser(),
+      isAdmin: LoginStore.userIsAdmin(EventStore.getEvent()),
+      postsData: PostsStore.getPosts(),
+    };
+  }
 
-  getInitialState() {
-    return WriteApp.getStateFromStores();
-  },
+  state = WriteApp.getStateFromStores();
 
   componentWillMount() {
     var eventId = this.props.match.params.eventId;
     this.setState({ eventId });
-  },
+  }
 
   componentDidMount() {
     const { eventId } = this.state;
@@ -49,13 +42,13 @@ var WriteApp = createReactClass({
       eventId,
       SocketActions.receiveUpdate,
     );
-  },
+  }
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.event._id !== this.state.event._id) {
       window.document.title = nextState.event.eventTitle;
     }
-  },
+  }
 
   componentDidUpdate() {
     var eventId = this.props.match.params.eventId;
@@ -64,18 +57,18 @@ var WriteApp = createReactClass({
       EventStore.init(eventId);
       PostsStore.init(eventId);
     }
-  },
+  }
 
   componentWillUnmount() {
     EventStore.removeChangeListener(this.handleStoreChange);
     LoginStore.removeChangeListener(this.handleStoreChange);
     PostsStore.removeChangeListener(this.handleStoreChange);
     WSHelper.close();
-  },
+  }
 
-  handleStoreChange() {
+  handleStoreChange = () => {
     this.setState(WriteApp.getStateFromStores());
-  },
+  };
 
   render() {
     var isAdmin = LoginStore.userIsAdmin(this.state.event);
@@ -100,7 +93,7 @@ var WriteApp = createReactClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 export default WriteApp;

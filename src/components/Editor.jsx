@@ -1,24 +1,22 @@
 import React from 'react';
 import PostsActions from '../actions/PostsActions';
-import PropTypes from 'prop-types';
-import createReactClass from 'create-react-class';
 import './__styles__/NewPost.css';
 
-var NewPost = createReactClass({
-  handleSubmit(e) {
+class NewPost extends React.Component {
+  handleSubmit = e => {
     e.preventDefault();
     var entryText = this.refs.text.value;
     if (entryText) {
       PostsActions.submit(entryText);
     }
     this.refs.text.value = '';
-  },
+  };
 
-  checkSubmit(e) {
+  checkSubmit = e => {
     if (e.keyCode === 13 && e.ctrlKey) {
       this.handleSubmit(e);
     }
-  },
+  };
 
   render() {
     return (
@@ -29,13 +27,13 @@ var NewPost = createReactClass({
               Comment
             </div>
           </div>
-          <form className="ten columns body-text text-area" role="form">
+          <form className="ten columns body-text text-area">
             <textarea onKeyDown={() => this.checkSubmit()} ref="text" />
           </form>
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 export default NewPost;

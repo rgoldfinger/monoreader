@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import createReactClass from 'create-react-class';
 import { Link } from 'react-router-dom';
 import * as R from 'ramda';
 import UserBox from './UserBox';
 import LoginStore from '../stores/LoginStore';
 import API from '../helpers/ApiHelper';
 
-var Event = createReactClass({
-  propTypes: {
+class Event extends React.Component {
+  static propTypes = {
     event: PropTypes.object.isRequired,
-  },
+  };
 
   render() {
     return (
@@ -22,15 +21,15 @@ var Event = createReactClass({
         </span>
       </div>
     );
-  },
-});
+  }
+}
 
-var NewEvent = createReactClass({
-  contextTypes: {
+class NewEvent extends React.Component {
+  static contextTypes = {
     router: PropTypes.object,
-  },
+  };
 
-  create() {
+  create = () => {
     var title = this.state.title;
     const { router } = this.context;
     if (title) {
@@ -44,7 +43,7 @@ var NewEvent = createReactClass({
         router.history.push({ ...location, pathname: `write/${data._id}` });
       });
     }
-  },
+  };
 
   render() {
     return (
@@ -63,40 +62,36 @@ var NewEvent = createReactClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
-var EventsList = createReactClass({
-  statics: {
-    getStateFromStores() {
-      return {
-        user: LoginStore.getCurrentUser(),
-      };
-    },
-  },
+class EventsList extends React.Component {
+  static getStateFromStores() {
+    return {
+      user: LoginStore.getCurrentUser(),
+    };
+  }
 
-  getInitialState() {
-    return EventsList.getStateFromStores();
-  },
+  state = EventsList.getStateFromStores();
 
   componentWillMount() {
     window.document.title = 'ReadItLive.net';
-  },
+  }
 
   componentDidMount() {
     API('GET', 'event', {}, (err, data) => {
       this.setState({ data: R.reverse(data) });
     });
     LoginStore.addChangeListener(this.handleStoreChange);
-  },
+  }
 
   componentWillUnmount() {
     LoginStore.removeChangeListener(this.handleStoreChange);
-  },
+  }
 
-  handleStoreChange() {
+  handleStoreChange = () => {
     this.setState(EventsList.getStateFromStores());
-  },
+  };
 
   render() {
     var events;
@@ -113,7 +108,7 @@ var EventsList = createReactClass({
         {events}
       </div>
     );
-  },
-});
+  }
+}
 
 export default EventsList;

@@ -1,25 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import createReactClass from 'create-react-class';
 import CommentsStore from '../stores/CommentsStore';
 import CommentsActions from '../actions/CommentsActions';
 import constants from '../constants/constants';
 import './__styles__/CommentsDisplay.css';
 
-var CommentEntry = createReactClass({
-  propTypes: {
+class CommentEntry extends React.Component {
+  static propTypes = {
     comment: PropTypes.object.isRequired,
-  },
+  };
 
-  handleDelete(e) {
+  handleDelete = e => {
     e.stopPropagation();
     CommentsActions.delete(this.props.comment);
-  },
+  };
 
-  handlePost(e) {
+  handlePost = e => {
     e.stopPropagation();
     CommentsActions.submitCommentAsPost(this.props.comment);
-  },
+  };
 
   render() {
     var avatar = this.props.comment.avatarUrl || constants.Default_Avatar;
@@ -35,7 +34,7 @@ var CommentEntry = createReactClass({
           </div>
         </div>
         <div className="flex-start">
-          <img src={avatar} height="40" width="40" />
+          <img src={avatar} height="40" width="40" alt="avater" />
           <div className="card comment-text">
             <div className="author-name">{this.props.comment.author}:</div>
             {this.props.comment.postText}
@@ -43,36 +42,34 @@ var CommentEntry = createReactClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
-var CommentsDisplay = createReactClass({
-  contextTypes: {
+class CommentsDisplay extends React.Component {
+  static contextTypes = {
     router: PropTypes.object,
-  },
+  };
 
-  getInitialState() {
-    return {
-      comments: CommentsStore.getComments(),
-    };
-  },
+  state = {
+    comments: CommentsStore.getComments(),
+  };
 
   componentDidMount() {
     CommentsStore.addChangeListener(this.onStoreChange);
     CommentsStore.init(this.context.router.route.match.params.eventId);
-  },
+  }
 
   componentWillUnmount() {
     CommentsStore.removeChangeListener(this.onStoreChange);
-  },
+  }
 
-  onStoreChange() {
+  onStoreChange = () => {
     this.setState({ comments: CommentsStore.getComments() });
-  },
+  };
 
-  renderComment(comment, i) {
+  renderComment = (comment, i) => {
     return <CommentEntry comment={comment} isAdmin={this.props.isAdmin} key={i} />;
-  },
+  };
 
   render() {
     return (
@@ -80,7 +77,7 @@ var CommentsDisplay = createReactClass({
         {this.state.comments && this.state.comments.map(this.renderComment)}
       </div>
     );
-  },
-});
+  }
+}
 
 export default CommentsDisplay;

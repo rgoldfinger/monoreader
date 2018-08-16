@@ -1,12 +1,15 @@
 // https://github.com/odysseyscience/react-s3-uploader
 var React = require('react');
+var createReactClass = require('create-react-class');
 var ReactDOM = require('react-dom');
 var PropTypes = require('prop-types');
-var createReactClass = require('create-react-class');
+var ReactcreateClass = require('create-react-class');
 var S3Upload = require('./s3upload.js');
 var objectAssign = require('object-assign');
 
 var ReactS3Uploader = createReactClass({
+  displayName: 'ReactS3Uploader',
+
   propTypes: {
     onProgress: PropTypes.func,
     onFinish: PropTypes.func,

@@ -33,6 +33,8 @@ ViewerCountStore.dispatcherToken = AppDispatcher.register(function(payload) {
       _count = action.data.viewerCount;
       ViewerCountStore.emitChange();
       break;
+    default:
+      break;
   }
   return true;
 });

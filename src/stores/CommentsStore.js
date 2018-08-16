@@ -58,6 +58,8 @@ CommentsStore.dispatcherToken = AppDispatcher.register(function(payload) {
     //   _comments[index] = action.data.entry;
     //   CommentsStore.emitChange();
     //   break;
+    default:
+      break;
   }
   return true;
 });

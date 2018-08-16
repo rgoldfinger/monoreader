@@ -1,48 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as createReactClass from 'create-react-class';
-import { Link, Navigation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import UserBox from './UserBox';
 import ViewerCountStore from '../stores/ViewerCountStore';
 import EventActions from '../actions/EventActions';
 import './__styles__/TopBar.css';
 
-var TopBar = createReactClass({
-  propTypes: {
+class TopBar extends React.Component {
+  static propTypes = {
     event: PropTypes.object,
     user: PropTypes.object,
     isAdmin: PropTypes.bool.isRequired,
     router: PropTypes.object,
-  },
+  };
 
-  getInitialState() {
-    return {
-      viewerCount: 0,
-      liveMenu: false,
-    };
-  },
+  static defaultProps = { event: {} };
 
-  getDefaultProps() {
-    return { event: {} };
-  },
+  state = {
+    viewerCount: 0,
+    liveMenu: false,
+  };
 
   componentDidMount() {
     ViewerCountStore.addChangeListener(this.checkStores);
-  },
+  }
+
   componentWillUnmount() {
     ViewerCountStore.removeChangeListener(this.checkStores);
-  },
-  checkStores() {
+  }
+
+  checkStores = () => {
     this.setState({
       viewerCount: ViewerCountStore.getViewerCount(),
     });
-  },
+  };
 
-  toggleLive() {
+  toggleLive = () => {
     EventActions.toggleLive(this.props.event);
-  },
+  };
 
-  deleteEvent() {
+  deleteEvent = () => {
     if (window.confirm('Are you sure you want to delete this event?')) {
       const { router } = this.props;
       const navigate = () => {
@@ -53,13 +50,13 @@ var TopBar = createReactClass({
       };
       EventActions.delete(this.props.event, navigate);
     }
-  },
+  };
 
-  toggleMenu() {
+  toggleMenu = () => {
     this.setState({ liveMenu: !this.state.liveMenu });
-  },
+  };
 
-  renderLiveToggle(statusText) {
+  renderLiveToggle = statusText => {
     var menu = (
       <div className="nav-dropdown flex-box">
         <div onClick={() => this.toggleLive()} className="hyperbutton">
@@ -77,12 +74,12 @@ var TopBar = createReactClass({
         {this.state.liveMenu && menu}
       </div>
     );
-  },
+  };
 
   render() {
     var isLive = this.props.event.eventIsLive ? 'Live' : 'Event Ended';
     return (
-      <nav className="card TopBar" role="navigation">
+      <nav className="card TopBar">
         <Link to="events" className="navbar-brand">
           Live Update Guy
         </Link>
@@ -130,7 +127,7 @@ var TopBar = createReactClass({
         <UserBox user={this.props.user} />
       </nav>
     );
-  },
-});
+  }
+}
 
 export default TopBar;

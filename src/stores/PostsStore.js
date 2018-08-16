@@ -53,15 +53,19 @@ PostsStore.dispatcherToken = AppDispatcher.register(function(payload) {
       _posts.push(action.data.entry);
       PostsStore.emitChange();
       break;
-    case constants.DELETE_POST:
+    case constants.DELETE_POST: {
       var index = R.findIndex(R.propEq('_id', action.data.entryId))(_posts);
       _posts = R.remove(index, 1, _posts);
       PostsStore.emitChange();
       break;
-    case constants.PUT_POST:
-      var index = R.findIndex(R.propEq('_id', action.data.entryId))(_posts);
-      _posts[index] = action.data.entry;
+    }
+    case constants.PUT_POST: {
+      var i = R.findIndex(R.propEq('_id', action.data.entryId))(_posts);
+      _posts[i] = action.data.entry;
       PostsStore.emitChange();
+      break;
+    }
+    default:
       break;
   }
   return true;

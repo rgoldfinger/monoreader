@@ -1,31 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import createReactClass from 'create-react-class';
-import PostsActions from '../actions/PostsActions';
 import constants from '../constants/constants';
 import NewPost from './NewPost';
+import PostsActions from '../actions/PostsActions';
+
 import './__styles__/Post.css';
 
-var PostMeta = createReactClass({
-  propTypes: {
+class PostMeta extends React.Component {
+  static propTypes = {
     post: PropTypes.object.isRequired,
-  },
+  };
 
   render() {
     var avatar = this.props.post.avatarUrl || constants.Default_Avatar;
     return (
       <div className="metadata-area">
-        <img className="img-responsive avatar-pic" height="80" width="80" src={avatar} />
+        <img
+          className="img-responsive avatar-pic"
+          height="80"
+          width="80"
+          src={avatar}
+          alt="avater"
+        />
         <p className="meta meta-time">{this.props.post.timeEU}</p>
       </div>
     );
-  },
-});
+  }
+}
 
-var PostText = createReactClass({
-  propTypes: {
+class PostText extends React.Component {
+  static propTypes = {
     post: PropTypes.object.isRequired,
-  },
+  };
 
   render() {
     return (
@@ -38,18 +44,18 @@ var PostText = createReactClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
-var AdminArea = createReactClass({
-  propTypes: {
+class AdminArea extends React.Component {
+  static propTypes = {
     editing: PropTypes.bool,
     handleReply: PropTypes.func,
     handleDelete: PropTypes.func,
     handleEdit: PropTypes.func,
     handleEditCancel: PropTypes.func,
     handleEditSubmit: PropTypes.func,
-  },
+  };
 
   render() {
     if (this.props.editing) {
@@ -88,44 +94,42 @@ var AdminArea = createReactClass({
         </div>
       );
     }
-  },
-});
+  }
+}
 
-var Editor = createReactClass({
-  propTypes: {
+class Editor extends React.Component {
+  static propTypes = {
     post: PropTypes.object.isRequired,
     handleCancel: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-  },
+  };
 
-  getInitialState() {
-    return {
-      text: this.props.post.postText,
-    };
-  },
+  state = {
+    text: this.props.post.postText,
+  };
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     var entryText = this.refs.text.value;
     if (entryText) {
       this.props.handleSubmit(entryText);
     }
-  },
+  };
 
-  handleChange(e) {
+  handleChange = e => {
     this.setState({ text: e.target.value });
-  },
+  };
 
-  checkSubmit(e) {
+  checkSubmit = e => {
     if (e.keyCode === 13 && e.ctrlKey) {
       this.handleSubmit(e);
     }
-  },
+  };
 
   render() {
     return (
       <div className="body-text">
-        <form className="body-text text-area" role="form">
+        <form className="body-text text-area">
           <textarea
             value={this.state.text}
             onKeyDown={() => this.checkSubmit()}
@@ -135,35 +139,33 @@ var Editor = createReactClass({
         </form>
       </div>
     );
-  },
-});
+  }
+}
 
-var Reply = createReactClass({
-  propTypes: {
+class Reply extends React.Component {
+  static propTypes = {
     reply: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
     isAdmin: PropTypes.bool.isRequired,
     index: PropTypes.number.isRequired,
-  },
+  };
 
-  getInitialState() {
-    return {
-      editing: false,
-    };
-  },
+  state = {
+    editing: false,
+  };
 
-  handleDelete() {
+  handleDelete = () => {
     PostsActions.deleteReply(this.props.post, this.props.index);
-  },
+  };
 
-  handleEditSubmit() {
+  handleEditSubmit = () => {
     var replyText = this.refs.editor.refs.text.value;
     this.props.reply.postText = replyText; //HACK
     PostsActions.editReply(this.props.post, this.props.reply, this.props.index);
     this.setState({ editing: false });
-  },
+  };
 
-  renderEditor() {
+  renderEditor = () => {
     return (
       <div className="post-admin flex-box">
         <Editor
@@ -174,7 +176,7 @@ var Reply = createReactClass({
         />
       </div>
     );
-  },
+  };
 
   render() {
     var adminArea = (
@@ -197,23 +199,21 @@ var Reply = createReactClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
-var Post = createReactClass({
-  propTypes: {
+class Post extends React.Component {
+  static propTypes = {
     post: PropTypes.object.isRequired,
     isAdmin: PropTypes.bool.isRequired,
-  },
+  };
 
-  getInitialState() {
-    return {
-      editing: false,
-      replying: false,
-    };
-  },
+  state = {
+    editing: false,
+    replying: false,
+  };
 
-  renderReplies() {
+  renderReplies = () => {
     var replyEntry = (reply, i) => {
       return (
         <Reply
@@ -227,18 +227,18 @@ var Post = createReactClass({
     };
 
     return <div style={{ marginLeft: '100px' }}>{this.props.post.replies.map(replyEntry)}</div>;
-  },
+  };
 
-  handleDelete() {
+  handleDelete = () => {
     PostsActions.delete(this.props.post);
-  },
+  };
 
-  handleEditSubmit() {
+  handleEditSubmit = () => {
     var entry = this.refs.editor.refs.text.value;
     PostsActions.update(this.props.post._id, entry, () => this.setState({ editing: false }));
-  },
+  };
 
-  renderEditor() {
+  renderEditor = () => {
     return (
       <div className="post-admin flex-box">
         <Editor
@@ -249,14 +249,14 @@ var Post = createReactClass({
         />
       </div>
     );
-  },
+  };
 
-  submitReply(replyText) {
+  submitReply = replyText => {
     PostsActions.reply(this.props.post, replyText);
     this.setState({ replying: false });
-  },
+  };
 
-  renderReplyEditor() {
+  renderReplyEditor = () => {
     return (
       <div style={{ marginRight: '8%' }}>
         <NewPost
@@ -265,7 +265,7 @@ var Post = createReactClass({
         />
       </div>
     );
-  },
+  };
 
   render() {
     var post = <PostText post={this.props.post} />;
@@ -292,7 +292,7 @@ var Post = createReactClass({
         {this.state.replying && this.renderReplyEditor()}
       </div>
     );
-  },
-});
+  }
+}
 
 export default Post;

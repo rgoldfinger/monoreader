@@ -1,82 +1,82 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
 import LoginStore from '../stores/LoginStore';
 import LoginActions from '../actions/LoginActions';
 import constants from '../constants/constants';
 import S3Uploader from '../libs/S3Uploader';
 import './__styles__/UserBox.css';
 
-var UserBox = createReactClass({
+class UserBox extends React.Component {
   render() {
     return (
       <div className="UserArea">
         {!this.props.user ? <Login /> : <User user={this.props.user} />}
       </div>
     );
-  },
-});
+  }
+}
 
-var Login = createReactClass({
-  getInitialState() {
-    return {
-      expanded: false,
-      signup: false,
-      username: '',
-      password: '',
-      confirmPassword: '',
-      errorMessage: LoginStore.getLoginError(),
-    };
-  },
+class Login extends React.Component {
+  static displayName = 'Login';
+
+  state = {
+    expanded: false,
+    signup: false,
+    username: '',
+    password: '',
+    confirmPassword: '',
+    errorMessage: LoginStore.getLoginError(),
+  };
+
   componentDidMount() {
     LoginStore.addChangeListener(this.checkStores);
-  },
+  }
+
   componentWillUnmount() {
     LoginStore.removeChangeListener(this.checkStores);
-  },
-  checkStores() {
-    if (this.isMounted()) {
-      this.setState({
-        errorMessage: LoginStore.getLoginError(),
-      });
-    }
-  },
+  }
 
-  expandToggle() {
+  checkStores = () => {
+    this.setState({
+      errorMessage: LoginStore.getLoginError(),
+    });
+  };
+
+  expandToggle = () => {
     this.setState({
       expanded: !this.state.expanded,
       signup: false,
     });
-  },
+  };
 
-  goSignup() {
+  goSignup = () => {
     this.setState({
       signup: true,
     });
-  },
+  };
 
-  goLogin() {
+  goLogin = () => {
     this.setState({
       signup: false,
     });
-  },
+  };
 
-  handleLogin() {
+  handleLogin = () => {
     var username = this.refs.username.value;
     var password = this.refs.password.value;
     LoginActions.loginUser(username, password);
-  },
+  };
 
-  handleSignup() {
+  handleSignup = () => {
     var username = this.refs.username.value;
     var password = this.refs.password.value;
     LoginActions.signupUser(username, password);
-  },
+  };
 
-  checkEnter(e) {
+  checkEnter = e => {
     if (e.key === 'Enter') {
       this.handleSignup();
     }
-  },
+  };
 
   render() {
     var dropdown;
@@ -152,42 +152,40 @@ var Login = createReactClass({
         {dropdown}
       </div>
     );
-  },
-});
+  }
+}
 
-var User = createReactClass({
-  getInitialState() {
-    return {
-      expanded: false,
-      avatarAdd: false,
-    };
-  },
+class User extends React.Component {
+  state = {
+    expanded: false,
+    avatarAdd: false,
+  };
 
-  expandToggle() {
+  expandToggle = () => {
     this.setState({
       expanded: !this.state.expanded,
       avatarAdd: false,
     });
-  },
+  };
 
-  handleLogout() {
+  handleLogout = () => {
     LoginActions.logoutUser();
-  },
+  };
 
-  handleAddAvatarClick(e) {
+  handleAddAvatarClick = e => {
     e.stopPropagation();
     this.setState({
       avatarAdd: true,
     });
-  },
+  };
 
-  handleUploadComplete(data) {
+  handleUploadComplete = data => {
     LoginActions.updateAvatar(data);
     this.setState({
       avatarAdd: false,
       expanded: false,
     });
-  },
+  };
 
   render() {
     var avatar =
@@ -227,14 +225,14 @@ var User = createReactClass({
 
     return (
       <div onClick={() => this.expandToggle()} className="UserBox">
-        <img className="img-responsive nava-ava" src={avatar} />
+        <img className="img-responsive nava-ava" src={avatar} alt="avatar" />
         <div className="navbar-text navbar-user">
           <div className="username">{this.props.user.username}</div>
         </div>
         {dropdown}
       </div>
     );
-  },
-});
+  }
+}
 
 export default UserBox;

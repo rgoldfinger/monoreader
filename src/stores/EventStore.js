@@ -47,6 +47,8 @@ EventStore.dispatcherToken = AppDispatcher.register(function(payload) {
       _event.eventIsLive = !_event.eventIsLive;
       EventStore.emitChange();
       break;
+    default:
+      break;
   }
   return true;
 });

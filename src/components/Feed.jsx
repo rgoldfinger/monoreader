@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import createReactClass from 'create-react-class';
-
-// var LoginStore = require('../stores/LoginStore');
-import PostsStore from '../stores/PostsStore';
 
 import Post from './Post';
 
-var Feed = createReactClass({
-  propTypes: {
+class Feed extends React.Component {
+  static propTypes = {
     isAdmin: PropTypes.bool.isRequired,
     postsData: PropTypes.array.isRequired,
-  },
+  };
 
   render() {
     var postNodes;
@@ -22,7 +18,7 @@ var Feed = createReactClass({
     }
 
     return <div className="ril-container flex-1">{postNodes}</div>;
-  },
-});
+  }
+}
 
 export default Feed;

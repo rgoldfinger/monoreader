@@ -96,6 +96,8 @@ LoginStore.dispatcherToken = AppDispatcher.register(function(payload) {
       _logoutUser();
       LoginStore.emitChange();
       break;
+    default:
+      break;
   }
   return true;
 });
