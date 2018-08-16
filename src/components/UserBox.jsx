@@ -85,7 +85,7 @@ class Login extends React.Component {
         <div className="login-dropdown card">
           <div className="flex-container">
             <h5 className="margin-0">Login</h5>
-            <div className="hyperbutton" onClick={() => this.goSignup()}>
+            <div className="hyperbutton" onClick={this.goSignup}>
               Signup
             </div>
           </div>
@@ -93,16 +93,16 @@ class Login extends React.Component {
           <input type="email" ref="username" />
 
           <span>Password:</span>
-          <input onKeyDown={() => this.checkEnter()} ref="password" type="password" />
+          <input onKeyDown={this.checkEnter} ref="password" type="password" />
           <div className="flex-right">
-            <div className="hyperbutton" onClick={() => this.handleLogin()}>
+            <div className="hyperbutton" onClick={this.handleLogin}>
               Submit
             </div>
-            <div className="hyperbutton" onClick={() => this.expandToggle()}>
+            <div className="hyperbutton" onClick={this.expandToggle}>
               Cancel
             </div>
           </div>
-          {/*<button onClick={() => window.location.pathname = '/api/auth/facebook'} className="btn-facebook">Login with Facebook</button>*/}
+          {/*<button onClick={window.locationathname = '/api/auth/facebook'} className="btn-facebook">Login with Facebook</button>*/}
           {this.state.errorMessage && (
             <span style={{ color: '#FF9494' }}>{this.state.errorMessage}</span>
           )}
@@ -114,7 +114,7 @@ class Login extends React.Component {
         <div className="login-dropdown card">
           <div className="flex-container">
             <h5 className="margin-0">Signup</h5>
-            <div className="hyperbutton" onClick={() => this.goLogin()}>
+            <div className="hyperbutton" onClick={this.goLogin}>
               Login
             </div>
           </div>
@@ -127,12 +127,12 @@ class Login extends React.Component {
             <input ref="password" type="password" />
 
             <span>Confirm password:</span>
-            <input onKeyDown={() => this.checkEnter()} ref="password" type="password" />
+            <input onKeyDown={this.checkEnter} ref="password" type="password" />
             <div className="flex-right">
-              <div className="hyperbutton" onClick={() => this.handleSignup()}>
+              <div className="hyperbutton" onClick={this.handleSignup}>
                 Signup
               </div>
-              <div className="hyperbutton" onClick={() => this.expandToggle()}>
+              <div className="hyperbutton" onClick={this.expandToggle}>
                 Cancel
               </div>
             </div>
@@ -146,7 +146,7 @@ class Login extends React.Component {
 
     return (
       <div className="LoginBox">
-        <div onClick={() => this.expandToggle()} className="hyperbutton navbar-text">
+        <div onClick={this.expandToggle} className="hyperbutton navbar-text">
           Sign in/up
         </div>
         {dropdown}
@@ -197,13 +197,13 @@ class User extends React.Component {
       dropdown = (
         <div className="login-dropdown">
           <div className="flex-container">
-            <div className="hyperbutton" onClick={() => this.handleAddAvatarClick()}>
+            <div className="hyperbutton" onClick={this.handleAddAvatarClick}>
               Change avatar
             </div>
-            <div className="hyperbutton" onClick={() => this.handleLogout()}>
+            <div className="hyperbutton" onClick={this.handleLogout}>
               Logout
             </div>
-            <div className="hyperbutton" onClick={() => this.expandToggle()}>
+            <div className="hyperbutton" onClick={this.expandToggle}>
               Cancel
             </div>
           </div>
@@ -215,8 +215,8 @@ class User extends React.Component {
       dropdown = (
         <div className="login-dropdown card">
           <h5 className="margin-0">Upload new avatar:</h5>
-          <S3Uploader size={80} onFinish={() => this.handleUploadComplete()} />
-          <div className="hyperbutton" onClick={() => this.expandToggle()}>
+          <S3Uploader size={80} onFinish={this.handleUploadComplete} />
+          <div className="hyperbutton" onClick={this.expandToggle}>
             Cancel
           </div>
         </div>
@@ -224,7 +224,7 @@ class User extends React.Component {
     }
 
     return (
-      <div onClick={() => this.expandToggle()} className="UserBox">
+      <div onClick={this.expandToggle} className="UserBox">
         <img className="img-responsive nava-ava" src={avatar} alt="avatar" />
         <div className="navbar-text navbar-user">
           <div className="username">{this.props.user.username}</div>

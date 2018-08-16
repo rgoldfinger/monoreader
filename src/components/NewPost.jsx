@@ -42,7 +42,7 @@ class NewPost extends React.Component {
 
   renderCancel = () => {
     return (
-      <div className="hyperbutton" onClick={() => this.onCancel()}>
+      <div className="hyperbutton" onClick={this.onCancel}>
         Cancel
       </div>
     );
@@ -59,7 +59,7 @@ class NewPost extends React.Component {
 
   renderCustom = () => {
     return (
-      <div onClick={() => this.handleCustom()} className="hyperbutton">
+      <div onClick={this.handleCustom} className="hyperbutton">
         {this.props.customAction.label}
       </div>
     );
@@ -69,17 +69,13 @@ class NewPost extends React.Component {
     return (
       <div className="NewPost">
         <form className="body-text text-area flex-right">
-          <textarea className="card" onKeyDown={() => this.checkSubmit()} ref="text" />
+          <textarea className="card" onKeyDown={this.checkSubmit} ref="text" />
         </form>
         <div className="flex-right">
-          {this.props.imageUpload && <S3Uploader onFinish={() => this.handleImageUpload()} />}
+          {this.props.imageUpload && <S3Uploader onFinish={this.handleImageUpload} />}
           {this.props.handleCancel && this.renderCancel()}
           {this.props.customAction && this.renderCustom()}
-          <div
-            style={{ color: '#c41a18' }}
-            className="hyperbutton"
-            onClick={() => this.handleSubmit()}
-          >
+          <div style={{ color: '#c41a18' }} className="hyperbutton" onClick={this.handleSubmit}>
             Comment
           </div>
         </div>

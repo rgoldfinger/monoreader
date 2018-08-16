@@ -23,12 +23,12 @@ class NewPost extends React.Component {
       <div className="NewPost container">
         <div className="row card">
           <div className="two columns">
-            <div className="hyperbutton" onClick={() => this.handleSubmit()}>
+            <div className="hyperbutton" onClick={this.handleSubmit}>
               Comment
             </div>
           </div>
           <form className="ten columns body-text text-area">
-            <textarea onKeyDown={() => this.checkSubmit()} ref="text" />
+            <textarea onKeyDown={this.checkSubmit} ref="text" />
           </form>
         </div>
       </div>

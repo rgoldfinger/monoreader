@@ -56,7 +56,7 @@ class NewEvent extends React.Component {
             style={{ margin: '0 12px' }}
             className="flex-1"
           />
-          <div className="hyperbutton" onClick={() => this.create()}>
+          <div className="hyperbutton" onClick={this.create}>
             Create
           </div>
         </div>

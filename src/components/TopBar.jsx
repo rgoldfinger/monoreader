@@ -16,6 +16,10 @@ class TopBar extends React.Component {
 
   static defaultProps = { event: {} };
 
+  static contextTypes = {
+    router: PropTypes.object,
+  };
+
   state = {
     viewerCount: 0,
     liveMenu: false,
@@ -41,11 +45,11 @@ class TopBar extends React.Component {
 
   deleteEvent = () => {
     if (window.confirm('Are you sure you want to delete this event?')) {
-      const { router } = this.props;
+      const { router } = this.context;
       const navigate = () => {
         router.history.push({
           ...router.history.location,
-          pathname: 'events',
+          pathname: '/',
         });
       };
       EventActions.delete(this.props.event, navigate);
@@ -59,17 +63,17 @@ class TopBar extends React.Component {
   renderLiveToggle = statusText => {
     var menu = (
       <div className="nav-dropdown flex-box">
-        <div onClick={() => this.toggleLive()} className="hyperbutton">
+        <div onClick={this.toggleLive} className="hyperbutton">
           {this.props.event.eventIsLive ? 'End Event' : 'Start Event'}
         </div>
-        <div onClick={() => this.deleteEvent()} className="hyperbutton">
+        <div onClick={this.deleteEvent} className="hyperbutton">
           Delete Event
         </div>
       </div>
     );
 
     return (
-      <div onClick={() => this.toggleMenu()} className="hyperbutton navbar-text">
+      <div onClick={this.toggleMenu} className="hyperbutton navbar-text">
         {statusText + ' — Event settings'}
         {this.state.liveMenu && menu}
       </div>

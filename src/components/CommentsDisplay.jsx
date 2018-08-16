@@ -26,10 +26,10 @@ class CommentEntry extends React.Component {
     return (
       <div className="CommentEntry">
         <div className="flex-right">
-          <div onClick={() => this.handleDelete()} className="hyperbutton">
+          <div onClick={this.handleDelete} className="hyperbutton">
             Delete
           </div>
-          <div onClick={() => this.handlePost()} className="hyperbutton">
+          <div onClick={this.handlePost} className="hyperbutton">
             Post
           </div>
         </div>
