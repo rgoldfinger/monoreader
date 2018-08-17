@@ -3,7 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import R from 'ramda';
 import compress from 'compression';
-import socket from './socketserver';
+import setupSocketServer from './socketserver';
 import db from './db/setup';
 import jwtAuth from './utils/jwtAuth';
 import localAuth from './utils/localAuth';
@@ -12,6 +12,7 @@ import utils from './utils/utils';
 import passport from 'passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import path from 'path';
+import http from 'http';
 
 var app = express();
 
@@ -200,7 +201,7 @@ db.once('open', function() {
 
       event.save(function(err, event) {
         if (err) return res.sendStatus(500);
-        socket.send('put', 'Event', req.params.eventId, {
+        SocketServer.send('put', 'Event', req.params.eventId, {
           eventId: req.params.eventId,
           event: event,
         });
@@ -234,7 +235,7 @@ db.once('open', function() {
         console.log(err);
         res.sendStatus(400);
       } else {
-        socket.send('post', 'Entry', req.params.eventId, {
+        SocketServer.send('post', 'Entry', req.params.eventId, {
           eventId: req.params.eventId,
           entry: entry,
         });
@@ -266,7 +267,7 @@ db.once('open', function() {
           console.log(err);
           res.sendStatus(500);
         } else {
-          socket.send('delete', 'Entry', req.params.eventId, req.params);
+          SocketServer.send('delete', 'Entry', req.params.eventId, req.params);
           console.log('delete', 'Entry', req.params);
           res.sendStatus(200);
         }
@@ -291,7 +292,7 @@ db.once('open', function() {
             console.log(err);
             res.sendStatus(500);
           } else {
-            socket.send('put', 'Entry', req.params.eventId, {
+            SocketServer.send('put', 'Entry', req.params.eventId, {
               entryId: req.params.entryId,
               eventId: req.params.eventId,
               entry: entry,
@@ -316,7 +317,7 @@ db.once('open', function() {
         console.log(err);
         res.sendStatus(400);
       } else {
-        socket.send('post', 'Comment', req.params.eventId, {
+        SocketServer.send('post', 'Comment', req.params.eventId, {
           eventId: req.params.eventId,
           comment: comment,
         });
@@ -349,7 +350,7 @@ db.once('open', function() {
           console.log(err);
           res.sendStatus(500);
         } else {
-          socket.send('delete', 'Comment', req.params.eventId, req.params);
+          SocketServer.send('delete', 'Comment', req.params.eventId, req.params);
           console.log('delete', 'Comment', req.params);
           res.sendStatus(200);
         }
@@ -375,7 +376,7 @@ db.once('open', function() {
    * Force all connected clients to reload
    */
   app.post('/api/reload/:eventId', jwtAuth.checkToken, function(req, res) {
-    socket.send('reload', 'System', req.params.eventId);
+    SocketServer.send('reload', 'System', req.params.eventId);
     res.sendStatus(200);
   });
 
@@ -390,5 +391,8 @@ db.once('open', function() {
   });
 });
 
-app.listen(PORT);
+const server = http.createServer(app);
+const SocketServer = setupSocketServer(server);
+
+server.listen(PORT);
 console.log(`Server running on port ${PORT}`);

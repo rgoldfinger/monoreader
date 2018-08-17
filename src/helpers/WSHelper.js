@@ -8,7 +8,7 @@ var reconnect;
 
 var WSHelper = {
   connect(eventId, callback) {
-    sock = new SockJS(`${process.env.REACT_APP_SOCKET_URL}/ws`);
+    sock = new SockJS(`${process.env.REACT_APP_API_URL}/ws`);
     // sock = new SockJS('https://glacial-journey-58935.herokuapp.com:3080/ws');
     reconnect = true;
     sock.onmessage = function(e) {
